@@ -9,3 +9,4 @@ Para rodar a solução IoT da HealthSync basta:
 
 Para mais detalhes da solução e esquema eletrônico verifique o pdf e imagem anexada no repositório.
 VÍDEO EXPLICATIVO: https://www.youtube.com/watch?v=pfW1iysGCy8
+LINK DO PROTÓTIPO: https://wokwi.com/projects/382298426527618049
