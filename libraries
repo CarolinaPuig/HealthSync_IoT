@@ -1,0 +1,11 @@
+# Wokwi Library List
+# See https://docs.wokwi.com/guides/libraries
+
+# Automatically added based on includes:
+
+WiFi
+ThingSpeak
+BME280
+Adafruit BME280 Library
+DHT sensor library
+DHT sensor library for ESPx

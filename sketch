@@ -1,0 +1,71 @@
+#include <WiFi.h>
+#include <ThingSpeak.h>
+#include <DHT.h>
+
+const char* ssid = "Wokwi-GUEST";
+const char* password = "";
+
+WiFiClient client;
+
+unsigned long myChannelNumber = 1;
+const char* myWriteAPIKey = "QRIPKDQ0Z4CC4SGX";
+
+unsigned long lastTime = 0;
+unsigned long timerDelay = 3000;
+
+#define dhtPin 5
+#define DHTTYPE DHT22
+
+DHT dht(dhtPin, DHTTYPE);
+
+void setup() {
+  Serial.begin(115200);
+
+  Serial.print("Conectando a ");
+  Serial.println(ssid);
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+  }
+  Serial.println("");
+  Serial.print("Conectado a: ");
+  Serial.println(ssid);
+  Serial.print("Endereço IP: ");
+  Serial.println(WiFi.localIP());
+  Serial.println("");
+  Serial.println("Aguarde um momento");
+
+  dht.begin();
+
+  WiFi.mode(WIFI_STA);
+  
+  ThingSpeak.begin(client);
+}
+
+void loop() {
+  if ((millis() - lastTime) > timerDelay) {
+
+    if (WiFi.status() != WL_CONNECTED) {
+      Serial.print("Conectando... ");
+      while (WiFi.status() != WL_CONNECTED) {
+        WiFi.begin(ssid, password);
+        delay(5000);
+      }
+      Serial.println("\nConnected.");
+    }
+
+    float temperatureC = dht.readTemperature(); 
+    float humidity = dht.readHumidity(); 
+
+    Serial.print("Temperatura (ºC): ");
+    Serial.println(temperatureC);
+    Serial.print("Umidade (%): ");
+    Serial.println(humidity);
+
+    ThingSpeak.setField(1, temperatureC); 
+    ThingSpeak.setField(2, humidity); 
+    ThingSpeak.writeFields(myChannelNumber, myWriteAPIKey);
+
+    lastTime = millis();
+  }
+}
