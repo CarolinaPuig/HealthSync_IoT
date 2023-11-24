@@ -8,3 +8,4 @@ Para rodar a solução IoT da HealthSync basta:
 6. Rodar o Wokwi, esperar conectar no Wifi e os dados passarão a serem apresentados no ThingSpeak
 
 Para mais detalhes da solução e esquema eletrônico verifique o pdf e imagem anexada no repositório.
+VÍDEO EXPLICATIVO: https://www.youtube.com/watch?v=pfW1iysGCy8
